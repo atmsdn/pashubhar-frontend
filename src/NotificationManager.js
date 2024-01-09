@@ -4,7 +4,6 @@ import { Platform } from "react-native";
 export const onDisplayNotification = async (message) => {
     try {
         if (message && message?.notification) {
-            console.log(message, "display")
             const channelId = await notifee.createChannel({
                 id: 'default',
                 name: 'Default Channel'

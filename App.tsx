@@ -27,14 +27,12 @@ function App(): JSX.Element {
 
   const onAppBootstrap = async () => {
     const permission = await notifee.requestPermission();
-    console.log(permission,"per")
     if (permission) {
       if (Platform.OS == "android") {
         await messaging().registerDeviceForRemoteMessages();
       }
       const token = await messaging().getToken();
       await AsyncStorage.setItem('token', token);
-      console.log(token, "token")
     }
   }
 
