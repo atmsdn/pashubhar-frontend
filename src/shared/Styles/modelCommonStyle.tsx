@@ -27,8 +27,7 @@ export const modelCommonStyle = StyleSheet.create({
     modalTextView: {
         fontSize: 16,
         fontWeight: 'bold',
-        // lineHeight: 20,
-        color: BLACK,
+        color: CYAN_BLUE,
         alignSelf: 'center',
         textAlign:'center'
     },
@@ -45,7 +44,7 @@ export const modelCommonStyle = StyleSheet.create({
         elevation: 2
     },
     buttonYesNo: {
-        backgroundColor: DARKGRAY,
+        backgroundColor: CYAN_BLUE,
         marginTop: 20,
         marginBottom: 10,
     },
@@ -63,7 +62,7 @@ export const modelCommonStyle = StyleSheet.create({
     buttonYesStyle: {
         borderRadius: 20,
         elevation: 2,
-        backgroundColor: DARKGRAY,
+        backgroundColor: CYAN_BLUE,
         marginBottom: 10,
         marginTop: 20,
         height: 40,
@@ -85,12 +84,12 @@ export const modelCommonStyle = StyleSheet.create({
         width: '60%',
         marginTop: 10,
         borderWidth: 1,
-        borderColor: DARKGRAY,
+        borderColor: CYAN_BLUE,
         alignItems: 'center',
         justifyContent: 'center'
     },
     formNoTxt: {
-        color: DARKGRAY,
+        color: CYAN_BLUE,
         fontSize: 16,
         lineHeight: 22,
         fontWeight: 'bold'

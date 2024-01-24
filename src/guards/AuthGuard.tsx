@@ -14,10 +14,7 @@ const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
         return <>{children}</>
     } else {
         return (
-            <>
-                <StatusBar backgroundColor='white' barStyle="dark-content" />
-                <AuthNavigator />
-            </>
+            <AuthNavigator />
         );
     }
 };

@@ -6,9 +6,9 @@ const DeptInfoScreen = () => {
   return (
     <View style={styles.container}>
       <View style={styles.logoContainer}>
-        <Image source={require('../assets/UniversityNewNew.png')} style={styles.logo} />
+        <Image source={require('../assets/universityLogo.png')} style={styles.logo} />
         <View style={styles.logoSpace} />
-        <Image source={require('../assets/CollageNewNew.png')} style={styles.logo1} />
+        <Image source={require('../assets/collageLogo.png')} style={styles.logo1} />
       </View>
       <View style={styles.textContainer}>
         <Text style={styles.title}>Maharashtra Animal and Fishery sciences University Nagpur</Text>

@@ -1,15 +1,12 @@
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useNavigation } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useState } from "react";
 import { Pressable, ScrollView, StyleSheet, Text, ToastAndroid, TouchableOpacity, View } from "react-native";
 import { CodeField, Cursor, useBlurOnFulfill, useClearByFocusCell } from "react-native-confirmation-code-field";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useAuthContext } from "../authContext/AuthContext";
-import { RootStackParamList } from "../guards/AuthNavigator";
 import CountDown from "../auth/CountDown";
-import { BGRED, BLACK, BORDER_COLOR, DARK_GREEN, GREEN, GREY_SHADE, JPURPLE, LIGHTGREY, LIGHT_BLUE, MDBLUE, NAVYBULE, SPANISH_GRAY, WHITE } from "../shared/constant/color";
+import { BGRED, BLACK, BORDER_COLOR, CYAN_BLUE, DARK_GREEN, GREEN, GREY_SHADE, JPURPLE, LIGHTGREY, LIGHT_BLUE, MDBLUE, NAVYBULE, SPANISH_GRAY, WHITE } from "../shared/constant/color";
 import { ASYNC_STORAGE } from "../shared/constant/infoMsgStrings";
 import Api from "../api/Api";
 import { useTranslation } from "react-i18next";
@@ -151,7 +148,7 @@ export const otpstyles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   signIn: {
-    backgroundColor: 'grey',
+    backgroundColor: CYAN_BLUE,
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 10,
@@ -173,8 +170,7 @@ export const otpstyles = StyleSheet.create({
   },
   textHeader: {
     fontSize: 14,
-    // lineHeight: 20,
-    color: BLACK,
+    color: CYAN_BLUE,
     textAlign: 'center',
     marginTop: 8,
     fontWeight: 'bold'
@@ -199,7 +195,7 @@ export const otpstyles = StyleSheet.create({
   phoneNumber: {
     fontSize: 13,
     lineHeight: 20,
-    color: BLACK,
+    color: CYAN_BLUE,
     fontWeight: "bold",
     marginTop: 5,
     marginHorizontal: 20
@@ -231,11 +227,11 @@ export const otpstyles = StyleSheet.create({
     justifyContent: 'center'
   },
   resendOTPTxt: {
-    color: BLACK,
+    color: CYAN_BLUE,
     marginRight: 10
   },
   resendOTP: {
-    color: BLACK,
+    color: CYAN_BLUE,
     fontWeight: 'bold',
     paddingLeft: 0
   },
@@ -249,7 +245,7 @@ export const otpstyles = StyleSheet.create({
     color: BGRED
   },
   inputStyle: {
-    color: BLACK,
+    color: CYAN_BLUE,
     fontSize: 14,
     textAlign: 'center',
     textAlignVertical: 'center',
@@ -265,7 +261,7 @@ export const otpstyles = StyleSheet.create({
     justifyContent: "center",
     borderWidth: 1,
     borderStyle: 'solid',
-    borderColor: BORDER_COLOR,
+    borderColor: CYAN_BLUE,
     color: WHITE,
     width: 43,
     height: 45,
@@ -355,7 +351,7 @@ export const otpstyles = StyleSheet.create({
   },
   secondsText: {
     marginRight: 5,
-    color: BLACK,
+    color: CYAN_BLUE,
     fontSize: 14,
     lineHeight: 20,
   },

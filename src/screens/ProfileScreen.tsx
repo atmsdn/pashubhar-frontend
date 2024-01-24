@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import DropDownPickerSearchable from '../component/DropDownPickerSearchable';
 import { SPECIES_TYPE, SPECIES_TYPE1, SPECIES_TYPE2 } from '../shared/constant/infoMsgStrings';
-import { BLACK, WHITE } from '../shared/constant/color';
+import { BLACK, CYANBLUE, CYAN_BLUE, WHITE } from '../shared/constant/color';
 import { useAuthContext } from '../authContext/AuthContext';
 import { useTranslation } from 'react-i18next';
 
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   textInput: {
-    color: 'black',
+    color: CYAN_BLUE,
     fontWeight: 'bold',
     paddingHorizontal: 10,
     textAlign: 'center',
@@ -144,15 +144,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   label: {
-    color: BLACK,
-    // textAlign:'center',
+    color: CYAN_BLUE,
     fontWeight: '600',
-    fontSize: 14,
-    // marginTop: 5,
+    fontSize: 12,
     position: 'absolute',
-    top: -11,
+    top: -10,
     backgroundColor: WHITE,
     paddingHorizontal: 5,
-    left: 20
+    left: 15
   },
 });

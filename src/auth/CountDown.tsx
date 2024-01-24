@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, AppState } from 'react-native';
-import { BLACK } from '../shared/constant/color';
+import { BLACK, CYAN_BLUE } from '../shared/constant/color';
 import { useTranslation } from 'react-i18next';
 let subscription: any = null;
 
@@ -126,7 +126,7 @@ class CountDown extends React.PureComponent {
                         {showSeparator && timeToShow.includes('M') && timeToShow.includes('S') ? this.renderSeparator() : null}
                         {timeToShow.includes('S') ? this.renderSecondDigit(minutes, seconds) : null}
                     </Text>
-                    
+
                 </View>
             </Component>
         );
@@ -153,13 +153,13 @@ const styles = StyleSheet.create({
     },
     labelText: {
         marginRight: 5,
-        color: BLACK,
+        color: CYAN_BLUE,
         fontSize: 14,
         lineHeight: 20,
     },
     secondsText: {
         marginRight: 5,
-        color: BLACK,
+        color: CYAN_BLUE,
         fontSize: 14,
         lineHeight: 20,
     },
@@ -167,6 +167,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: '700',
         lineHeight: 20,
+        color: CYAN_BLUE
     }
 });
 export default CountDown;

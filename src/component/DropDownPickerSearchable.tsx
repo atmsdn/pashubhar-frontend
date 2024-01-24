@@ -1,7 +1,7 @@
 import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
-import { BGRED, BLACK, GRAY_SHADE, LIGHTGREY, WHITE, WHITE_BACKGROUND } from '../shared/constant/color';
+import { BGRED, BLACK, CYAN_BLUE, GRAY_SHADE, LIGHTGREY, WHITE, WHITE_BACKGROUND } from '../shared/constant/color';
 import BelowIcon from "../shared/svg/BelowIcon";
 
 const DropDownPickerSearchable = ({ onChangeTextDropdown, onEndReached, title, errorMsg, labelField, isRemove, valueField, itemStyle, name, data, isDisable, setValue, value, isSearchable, style, iconDisplay, placeholderStyle, selectedText, iconColor }: any) => {
@@ -62,15 +62,14 @@ const styles = StyleSheet.create({
         paddingBottom: 10,
     },
     titleStyle: {
-        color: BLACK,
-        marginHorizontal: 20,
+        color: CYAN_BLUE,
+        marginHorizontal: 15,
         paddingHorizontal: 5,
         position: 'absolute',
         backgroundColor: WHITE,
-        // lineHeight: 16,
-        fontSize: 14,
-        // marginTop: 10,
+        fontSize: 12,
         fontWeight: '600',
+        marginTop: 2
     },
     formTxt: {
         marginBottom: 7
@@ -93,7 +92,7 @@ const styles = StyleSheet.create({
     },
     selectedTextStyle: {
         fontWeight: 'bold',
-        color: BLACK,
+        color: CYAN_BLUE,
         lineHeight: 20,
         marginLeft: 30,
         fontSize: 14,

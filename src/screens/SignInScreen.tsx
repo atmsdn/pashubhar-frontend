@@ -1,18 +1,14 @@
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { useState } from 'react'
-import { SafeAreaView, StyleSheet, Text, TextInput, ToastAndroid, TouchableOpacity, View } from 'react-native'
-import { RootStackParamList } from '../guards/AuthNavigator';
+import { SafeAreaView, ScrollView, StyleSheet, Text, TextInput, ToastAndroid, TouchableOpacity, View } from 'react-native'
 import Api from '../api/Api';
 import { ASYNC_STORAGE, LANGUAGES, MOBILE_NUMBER_REGX } from '../shared/constant/infoMsgStrings';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { BLACK, BORDER_COLOR, WHITE } from '../shared/constant/color';
+import { BLACK, BORDER_COLOR, CYANBLUE, CYAN_BLUE, WHITE } from '../shared/constant/color';
 import DropDownPickerSearchable from '../component/DropDownPickerSearchable';
 import { useAuthContext } from '../authContext/AuthContext';
 import { useTranslation } from 'react-i18next';
 
-function SignInScreen() {
-  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+function SignInScreen({ navigation }: any) {
   const { t } = useTranslation();
   const { updateState, state }: any = useAuthContext();
   const [formValue, setFormValue] = useState({
@@ -69,8 +65,9 @@ function SignInScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View>
-
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <Text style={styles.projectName}>{t('Pashubhar')}</Text>
+        <Text style={styles.subtitle}>{t('An accurate estimation of animal weight using selected body measurements can be done using the Pashubhar application in your mobile.')}</Text>
         <View style={styles.textInputContainer}>
           <Text style={styles.label}>{t('Mobile Number')}</Text>
           <TextInput
@@ -83,9 +80,10 @@ function SignInScreen() {
             value={formValue.mobileNo}
           />
         </View>
-      </View>
+      </ScrollView>
+
       <View>
-        <View style={{ marginTop: 20 }}>
+        <View style={{ marginVertical: 10 }}>
           <TouchableOpacity style={styles.signIn} onPress={() => sendOTP()}>
             <Text style={[styles.textSign, { color: '#fff' }]}> {t('Request OTP')} </Text>
           </TouchableOpacity>
@@ -95,7 +93,7 @@ function SignInScreen() {
           <Text style={{ marginHorizontal: 5 }}>or</Text>
           <View style={[styles.horizontalLine, { width: '47%' }]}></View>
         </View>
-        <View>
+        <View style={{ marginVertical: 10 }}>
           <TouchableOpacity style={styles.signIn} onPress={() => { navigation.navigate('SignUpScreen'), setFormValue({ ...formValue, mobileNo: '' }) }}>
             <Text style={[styles.textSign, { color: '#fff' }]}> {t('Sign Up')} </Text>
           </TouchableOpacity>
@@ -127,30 +125,45 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     justifyContent: 'space-between',
     paddingBottom: 20,
-    paddingTop: 40
+  },
+  projectName: {
+    fontSize: 32,
+    marginBottom: 20,
+    color: CYAN_BLUE,
+    fontWeight: 'bold',
+    alignSelf: 'center'
+  },
+  subtitle: {
+    color: CYAN_BLUE,
+    marginBottom: 20,
+    paddingHorizontal: 10,
+    fontSize: 14,
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
   subView: {
     flexDirection: 'column',
     justifyContent: 'flex-end'
   },
   textInputContainer: {
-    marginTop: 10,
+    marginTop: 20,
     marginBottom: 5,
-    height: 50,
+    height: 45,
     color: 'white',
     alignItems: 'center',
     borderWidth: 0.5,
+    borderColor: CYAN_BLUE,
     borderRadius: 10,
   },
   textInput: {
-    color: 'black',
+    color: CYAN_BLUE,
     fontWeight: 'bold',
     paddingHorizontal: 10,
     textAlign: 'center',
     alignSelf: 'center'
   },
   signIn: {
-    backgroundColor: 'grey',
+    backgroundColor: CYAN_BLUE,
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 10,
@@ -168,7 +181,7 @@ const styles = StyleSheet.create({
     color: WHITE,
     borderWidth: 0.5,
     borderRadius: 10,
-    height: 50,
+    height: 45,
     justifyContent: 'center',
   },
   horizontalLine: {
@@ -177,15 +190,13 @@ const styles = StyleSheet.create({
     marginVertical: 10
   },
   label: {
-    color: BLACK,
-    // textAlign:'center',
+    color: CYAN_BLUE,
     fontWeight: '600',
-    fontSize: 14,
-    // marginTop: 5,
+    fontSize: 12,
     position: 'absolute',
-    top: -11,
+    top: -10,
     backgroundColor: WHITE,
     paddingHorizontal: 5,
-    left: 20
+    left: 15
   },
 });

@@ -1,18 +1,14 @@
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { useState } from 'react'
-import { Alert, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, ToastAndroid, TouchableOpacity, View } from 'react-native'
-import { RootStackParamList } from '../guards/AuthNavigator';
+import { SafeAreaView, ScrollView, StyleSheet, Text, TextInput, ToastAndroid, TouchableOpacity, View } from 'react-native'
 import DropDownPickerSearchable from '../component/DropDownPickerSearchable';
 import { MOBILE_NUMBER_REGX, SPECIES_TYPE, SPECIES_TYPE1, SPECIES_TYPE2 } from '../shared/constant/infoMsgStrings';
-import { BLACK, BORDER_COLOR, GRAY_BORDER, WHITE } from '../shared/constant/color';
+import { BLACK, BORDER_COLOR, CYAN_BLUE, WHITE } from '../shared/constant/color';
 import Api from '../api/Api';
 import { useTranslation } from 'react-i18next';
 import { useAuthContext } from '../authContext/AuthContext';
 
-function SignUpScreen() {
+function SignUpScreen({ navigation }: any) {
   const { state }: any = useAuthContext();
-  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { t } = useTranslation();
   const [formValue, setFormValue] = useState({
     mobileNo: '',
@@ -78,7 +74,7 @@ function SignUpScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
-
+        {/* <Text style={styles.projectName}>{t('Registration')}</Text> */}
         <View style={styles.textInputContainer}>
           <Text style={styles.label}>{t('Your Name')}</Text>
           <TextInput
@@ -143,7 +139,7 @@ function SignUpScreen() {
         </View>
       </ScrollView>
       <View>
-        <View style={{ marginTop: 20 }}>
+        <View style={{ marginVertical: 10 }}>
           <TouchableOpacity style={styles.signIn} onPress={() => sendOTP()}>
             <Text style={[styles.textSign, { color: '#fff' }]}> {t('Register')} </Text>
           </TouchableOpacity>
@@ -153,7 +149,7 @@ function SignUpScreen() {
           <Text style={{ marginHorizontal: 5 }}>or</Text>
           <View style={[styles.horizontalLine, { width: '47%' }]}></View>
         </View>
-        <View>
+        <View style={{ marginTop: 10 }}>
           <TouchableOpacity style={styles.signIn} onPress={() => navigation.navigate('SignInScreen')}>
             <Text style={[styles.textSign, { color: '#fff' }]}> {t('Sign In')} </Text>
           </TouchableOpacity>
@@ -171,7 +167,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     paddingHorizontal: 20,
     justifyContent: 'space-between',
-    paddingVertical: 20,
+    paddingBottom: 20,
   },
   subView: {
     flexDirection: 'column',
@@ -188,23 +184,31 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   textInputContainer: {
-    marginTop: 10,
+    marginTop: 20,
     marginBottom: 5,
-    height: 50,
+    height: 45,
     color: 'white',
     alignItems: 'center',
     borderWidth: 0.5,
     borderRadius: 10,
+    borderColor: CYAN_BLUE
+  },
+  projectName: {
+    fontSize: 32,
+    marginBottom: 20,
+    color: CYAN_BLUE,
+    fontWeight: 'bold',
+    alignSelf: 'center'
   },
   textInput: {
-    color: 'black',
+    color: CYAN_BLUE,
     fontWeight: 'bold',
     paddingHorizontal: 10,
     textAlign: 'center',
     alignSelf: 'center'
   },
   signIn: {
-    backgroundColor: 'grey',
+    backgroundColor: CYAN_BLUE,
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 10,
@@ -221,15 +225,13 @@ const styles = StyleSheet.create({
     marginVertical: 10
   },
   label: {
-    color: BLACK,
-    // textAlign:'center',
+    color: CYAN_BLUE,
     fontWeight: '600',
-    fontSize: 14,
-    // marginTop: 5,
+    fontSize: 12,
     position: 'absolute',
-    top: -11,
+    top: -10,
     backgroundColor: WHITE,
     paddingHorizontal: 5,
-    left: 20
+    left: 15
   },
 });

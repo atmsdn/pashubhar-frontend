@@ -11,22 +11,25 @@ export const ASYNC_STORAGE = {
 }
 
 export const SPECIES_TYPE = [
-    { label: 'Cattle', value: 'Cattle' },
+    { label: 'Cow', value: 'Cow' },
     { label: 'Buffalo', value: 'Buffalo' },
     { label: 'Sheep', value: 'Sheep' },
-    { label: 'Goat', value: 'Goat' }
+    { label: 'Goat', value: 'Goat' },
+    { label: 'Dog', value: 'Dog' },
 ]
 export const SPECIES_TYPE1 = [
-    { label: 'गुरे', value: 'Cattle' },
+    { label: 'गाय', value: 'Cow' },
     { label: 'म्हैस', value: 'Buffalo' },
     { label: 'मेंढी', value: 'Sheep' },
-    { label: 'बकरी', value: 'Goat' }
+    { label: 'शेळी', value: 'Goat' },
+    { label: 'कुत्रा', value: 'Dog' },
 ]
 export const SPECIES_TYPE2 = [
-    { label: 'मवेशी', value: 'Cattle' },
+    { label: 'गाय', value: 'Cow' },
     { label: 'भैंस', value: 'Buffalo' },
     { label: 'भेड़', value: 'Sheep' },
-    { label: 'बकरी', value: 'Goat' }
+    { label: 'शेळी', value: 'Goat' },
+    { label: 'कुत्ता', value: 'Dog' },
 ]
 export const LANGUAGES = [
     { label: 'English', value: 'en' },

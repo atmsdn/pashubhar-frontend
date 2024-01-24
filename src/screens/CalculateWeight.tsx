@@ -1,27 +1,42 @@
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import React, { useEffect, useState } from 'react'
-import { SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import { BLACK, DARKGRAY, WHITE } from '../shared/constant/color';
-import { drawertype } from '../routes/AppRouter';
+import React, { useEffect, useRef, useState } from 'react'
+import { ActivityIndicator, Image, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, ToastAndroid, TouchableOpacity, View } from 'react-native'
+import { BLACK, CYAN_BLUE, DARKGRAY, WHITE } from '../shared/constant/color';
 import Api from '../api/Api';
 import { useTranslation } from 'react-i18next';
+import ViewShot from 'react-native-view-shot';
+import RNFS from 'react-native-fs';
+import { requestExternalStoragePermission } from '../component/Permission';
+import AlertModal from '../shared/constant/AlertModal';
 
-function CalculateWeight() {
-  const navigation = useNavigation<NativeStackNavigationProp<drawertype>>();
+function CalculateWeight(props: any) {
+  const name = props?.route?.params?.name;
   const { t } = useTranslation();
+  const viewShotRef: any = useRef();
   const [result, setResult] = useState('')
+  const [loader, setLoader] = useState(false)
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedImage, setSelectedImage] = useState('');
   const [formValue, setFormValue] = useState({
     field1: '',
     field2: '',
     field3: '',
     field4: '',
     field5: '',
+    field6: '',
   })
 
   useEffect(() => {
     handleGetConstant();
   }, [])
+
+  const onProceedViewImage = (image: any) => {
+    setSelectedImage(image)
+    setModalVisible(true);
+  };
+
+  const onCancel = () => {
+    setModalVisible(false);
+  };
 
   const handleGetConstant = async () => {
     try {
@@ -33,17 +48,19 @@ function CalculateWeight() {
   }
   const handleCalculate = async () => {
     const payload = {
-      field1: formValue?.field1,
-      field2: formValue?.field2,
-      field3: formValue?.field3,
-      field4: formValue?.field4,
-      field5: formValue?.field5,
+      type: name || "",
+      field1: formValue?.field2 || "0",
+      field2: formValue?.field3 || "0",
+      field3: formValue?.field4 || "0",
+      field4: formValue?.field5 || "0",
+      field5: formValue?.field6 || "0",
     }
     try {
-      if (formValue?.field1 && formValue?.field2 && formValue?.field3 && formValue?.field4 && formValue?.field5) {
+      if (formValue?.field2 || formValue?.field3 || formValue?.field4 || formValue?.field5 || formValue?.field6) {
+        setLoader(true)
         const response = await Api.calculateWeight(payload);
-        console.log(response?.data?.data)
         setResult(response?.data?.data)
+        setLoader(false)
       } else {
         setResult('')
       }
@@ -54,92 +71,164 @@ function CalculateWeight() {
 
   const textInputChange = (name: any, val: any) => {
     setFormValue({ ...formValue, [name]: val })
+    setResult('')
   }
+
+  const captureScreenshot = async () => {
+    try {
+      await requestExternalStoragePermission()
+      const result = await viewShotRef.current.capture();
+      const data = await RNFS.readFile(result, 'base64')
+      const filePath = `${RNFS.DownloadDirectoryPath}/${new Date()?.getTime()}Screenshot.jpg`;
+      await RNFS.writeFile(filePath, data, 'base64');
+      ToastAndroid.show(t('Screenshot saved'), ToastAndroid.SHORT);
+      props.navigation.goBack()
+    } catch (error) {
+      console.error('Error capturing screenshot:', error);
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
+        <ViewShot ref={viewShotRef} options={{ format: 'jpg', quality: 0.9 }}>
+          <View style={{ backgroundColor: 'white', flex: 1 }}>
+            <Text style={styles.title}>{t(name)}</Text>
+            <View style={styles.mainInputContainer}>
+              <View style={styles.textInputContainer}>
+                <Text style={styles.label}>{t('Name/Identity')}</Text>
+                <TextInput
+                  style={styles.textInput}
+                  onChangeText={(val) => textInputChange('field1', val)}
+                  maxLength={20}
+                  placeholder={t('Name/Identity')}
+                  textAlign={'center'}
+                  value={formValue.field1}
+                />
+              </View>
+              <TouchableOpacity onPress={() => onProceedViewImage(require('../assets/dog.jpg'))}>
+                <Image source={require('../assets/dog.jpg')} resizeMode='contain' style={styles.imgaeStyle} />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.mainInputContainer}>
+              <View style={styles.textInputContainer}>
+                <Text style={styles.label}>{t('Height')}</Text>
+                <Text style={styles.label1}>{t('Cm')}</Text>
+                <TextInput
+                  style={styles.textInput}
+                  onChangeText={(val) => textInputChange('field2', val)}
+                  maxLength={3}
+                  keyboardType="numeric"
+                  placeholder={t("Height")}
+                  textAlign={'center'}
+                  value={formValue.field2}
+                />
+              </View>
+              <TouchableOpacity onPress={() => onProceedViewImage(require('../assets/dog.jpg'))}>
+                <Image source={require('../assets/dog.jpg')} resizeMode='contain' style={styles.imgaeStyle} />
+              </TouchableOpacity>
+            </View>
 
-        <View style={styles.textInputContainer}>
-          <Text style={styles.label}>{t('Enter')}</Text>
-          <TextInput
-            style={styles.textInput}
-            onChangeText={(val) => textInputChange('field1', val)}
-            maxLength={50}
-            keyboardType="numeric"
-            placeholder={t("Enter")}
-            textAlign={'center'}
-            value={formValue.field1}
-          />
-        </View>
+            <View style={styles.mainInputContainer}>
+              <View style={styles.textInputContainer}>
+                <Text style={styles.label}>{t('Height')}</Text>
+                <Text style={styles.label1}>{t('Cm')}</Text>
+                <TextInput
+                  style={styles.textInput}
+                  onChangeText={(val) => textInputChange('field3', val)}
+                  maxLength={3}
+                  keyboardType="numeric"
+                  placeholder={t("Height")}
+                  textAlign={'center'}
+                  value={formValue.field3}
+                />
+              </View>
+              <TouchableOpacity onPress={() => onProceedViewImage(require('../assets/dog.jpg'))}>
+                <Image source={require('../assets/dog.jpg')} resizeMode='contain' style={styles.imgaeStyle} />
+              </TouchableOpacity>
+            </View>
 
-        <View style={styles.textInputContainer}>
-          <Text style={styles.label}>{t('Enter')}</Text>
-          <TextInput
-            style={styles.textInput}
-            onChangeText={(val) => textInputChange('field2', val)}
-            maxLength={100}
-            keyboardType="numeric"
-            placeholder={t("Enter")}
-            textAlign={'center'}
-            value={formValue.field2}
-          />
-        </View>
+            <View style={styles.mainInputContainer}>
+              <View style={styles.textInputContainer}>
+                <Text style={styles.label}>{t('Height')}</Text>
+                <Text style={styles.label1}>{t('Cm')}</Text>
+                <TextInput
+                  style={styles.textInput}
+                  onChangeText={(val) => textInputChange('field4', val)}
+                  maxLength={3}
+                  keyboardType="numeric"
+                  placeholder={t("Height")}
+                  textAlign={'center'}
+                  value={formValue.field4}
+                />
+              </View>
+              <TouchableOpacity onPress={() => onProceedViewImage(require('../assets/dog.jpg'))}>
+                <Image source={require('../assets/dog.jpg')} resizeMode='contain' style={styles.imgaeStyle} />
+              </TouchableOpacity>
+            </View>
 
-        <View style={styles.textInputContainer}>
-          <Text style={styles.label}>{t('Enter')}</Text>
-          <TextInput
-            style={styles.textInput}
-            onChangeText={(val) => textInputChange('field3', val)}
-            maxLength={10}
-            keyboardType="numeric"
-            placeholder={t("Enter")}
-            textAlign={'center'}
-            value={formValue.field3}
-          />
-        </View>
+            <View style={styles.mainInputContainer}>
+              <View style={styles.textInputContainer}>
+                <Text style={styles.label}>{t('Height')}</Text>
+                <Text style={styles.label1}>{t('Cm')}</Text>
+                <TextInput
+                  style={styles.textInput}
+                  onChangeText={(val) => textInputChange('field5', val)}
+                  maxLength={3}
+                  keyboardType="numeric"
+                  placeholder={t("Height")}
+                  textAlign={'center'}
+                  value={formValue.field5}
+                />
+              </View>
+              <TouchableOpacity onPress={() => onProceedViewImage(require('../assets/dog.jpg'))}>
+                <Image source={require('../assets/dog.jpg')} resizeMode='contain' style={styles.imgaeStyle} />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.mainInputContainer}>
+              <View style={styles.textInputContainer}>
+                <Text style={styles.label}>{t('Height')}</Text>
+                <Text style={styles.label1}>{t('Cm')}</Text>
+                <TextInput
+                  style={styles.textInput}
+                  onChangeText={(val) => textInputChange('field6', val)}
+                  maxLength={3}
+                  keyboardType="numeric"
+                  placeholder={t("Height")}
+                  textAlign={'center'}
+                  value={formValue.field6}
+                />
+              </View>
+              <TouchableOpacity onPress={() => onProceedViewImage(require('../assets/dog.jpg'))}>
+                <Image source={require('../assets/dog.jpg')} resizeMode='contain' style={styles.imgaeStyle} />
+              </TouchableOpacity>
+            </View>
 
-        <View style={styles.textInputContainer}>
-          <Text style={styles.label}>{t('Enter')}</Text>
-          <TextInput
-            style={styles.textInput}
-            onChangeText={(val) => textInputChange('field4', val)}
-            maxLength={10}
-            keyboardType="numeric"
-            placeholder={t("Enter")}
-            textAlign={'center'}
-            value={formValue.field4}
-          />
-        </View>
-
-        <View style={styles.textInputContainer}>
-          <Text style={styles.label}>{t('Enter')}</Text>
-          <TextInput
-            style={styles.textInput}
-            onChangeText={(val) => textInputChange('field5', val)}
-            maxLength={10}
-            keyboardType="numeric"
-            placeholder={t("Enter")}
-            textAlign={'center'}
-            value={formValue.field5}
-          />
-        </View>
-        <View style={{ flexDirection: 'column', borderColor: DARKGRAY, borderWidth: 1, borderRadius: 10, marginTop: 10 }}>
-          <Text style={styles.resultText}>{t('Total weight in KG')}</Text>
-          <Text style={styles.resultText}>{Number(result)?.toFixed(2)}</Text>
-        </View>
+            {result && <View style={{ flexDirection: 'column', borderColor: DARKGRAY, borderWidth: 1, borderRadius: 10, marginTop: 20 }}>
+              <Text style={styles.resultText}>{t('Total weight in KG')}</Text>
+              <Text style={styles.resultText}>{Number(result)?.toFixed(2)}</Text>
+            </View>}
+          </View>
+        </ViewShot>
       </ScrollView>
 
       <View>
         <TouchableOpacity style={styles.signIn} onPress={handleCalculate} >
-          <Text style={[styles.textSign, { color: '#fff' }]}> {t('Calculate')} </Text>
+          {loader ? <ActivityIndicator /> :
+            <Text style={[styles.textSign, { color: '#fff' }]}> {t('Calculate')} </Text>}
         </TouchableOpacity>
       </View>
-      <View>
-        <TouchableOpacity style={styles.signIn} onPress={() => navigation.goBack()}>
-          <Text style={[styles.textSign, { color: '#fff' }]}> {t('Go Back')} </Text>
+
+      {result && <View>
+        <TouchableOpacity style={styles.signIn} onPress={() => captureScreenshot()}>
+          <Text style={[styles.textSign, { color: '#fff' }]}> {t('Take Screenshot and Save')} </Text>
         </TouchableOpacity>
-      </View>
+      </View>}
+
+      <AlertModal modalVisible={modalVisible} setModalVisible={setModalVisible}
+        onCancel={() => onCancel()}
+        image={selectedImage}
+      />
     </ SafeAreaView>
   );
 }
@@ -153,6 +242,21 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingBottom: 20
   },
+  title: {
+    fontSize: 22,
+    marginTop: 10,
+    paddingHorizontal: 10,
+    color: CYAN_BLUE,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  imgaeStyle: {
+    width: 80,
+    height: 45,
+    borderRadius: 10,
+    borderColor: CYAN_BLUE,
+    borderWidth: 1
+  },
   subView: {
     flexDirection: 'column',
     justifyContent: 'flex-end'
@@ -163,27 +267,33 @@ const styles = StyleSheet.create({
     color: WHITE,
     borderWidth: 0.5,
     borderRadius: 25,
-    height: 50,
+    height: 45,
     justifyContent: 'center',
   },
+  mainInputContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'baseline'
+  },
   textInputContainer: {
-    marginTop: 10,
+    marginTop: 20,
     marginBottom: 5,
-    height: 50,
+    height: 45,
     color: 'white',
     alignItems: 'center',
     borderWidth: 0.5,
     borderRadius: 10,
+    width: '70%'
   },
   textInput: {
-    color: 'black',
+    color: CYAN_BLUE,
     fontWeight: 'bold',
     paddingHorizontal: 10,
     textAlign: 'center',
     alignSelf: 'center'
   },
   signIn: {
-    backgroundColor: 'grey',
+    backgroundColor: CYAN_BLUE,
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 10,
@@ -196,19 +306,27 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   label: {
-    color: BLACK,
-    // textAlign:'center',
+    color: CYAN_BLUE,
     fontWeight: '600',
-    fontSize: 14,
-    // marginTop: 5,
+    fontSize: 12,
     position: 'absolute',
-    top: -11,
+    top: -10,
     backgroundColor: WHITE,
     paddingHorizontal: 5,
-    left: 20
+    left: 10
+  },
+  label1: {
+    color: CYAN_BLUE,
+    fontWeight: 'bold',
+    fontSize: 14,
+    position: 'absolute',
+    bottom: 15,
+    backgroundColor: WHITE,
+    paddingHorizontal: 5,
+    right: 10
   },
   resultText: {
-    color: BLACK,
+    color: CYAN_BLUE,
     textAlign: 'center',
     fontWeight: '600',
     fontSize: 14,
