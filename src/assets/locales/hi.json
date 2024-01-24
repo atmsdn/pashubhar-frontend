@@ -62,5 +62,7 @@
     "An accurate estimation of animal weight using selected body measurements can be done using the Pashubhar application in your mobile.": "आपके मोबाइल में पशुबार एप्लिकेशन का उपयोग करके चयनित शारीरिक माप का उपयोग करके पशु के वजन का सटीक अनुमान लगाया जा सकता है।",
     "Registration": "पंजीकरण",
     "Take Screenshot and Save": "स्क्रीनशॉट लें और सेव करें",
-    "Otp Verification": "ओटीपी सत्यापन"
+    "Otp Verification": "ओटीपी सत्यापन",
+    "Enter at least one value": "कम से कम एक मान दर्ज करें",
+    "Screenshot saved": "स्क्रीनशॉट सहेजा गया"
 }

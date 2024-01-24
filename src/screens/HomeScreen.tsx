@@ -42,20 +42,20 @@ function HomeScreen({ navigation }: any) {
                         </Collapsible>
                     </View>
                     <View style={styles.imagesView}>
-                        <TouchableOpacity onPress={() => navigation.navigate('CalculateWeight', { name: 'Cow' })}>
+                        <TouchableOpacity onPress={() => navigation.navigate('CalculateWeight', { name: 'Cow', image: require('../assets/Cow.jpg') })}>
                             <Image source={require('../assets/Cow.jpg')} resizeMode='contain' style={styles.imgaeStyle} />
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => navigation.navigate('CalculateWeight', { name: 'Buffalo' })}>
+                        <TouchableOpacity onPress={() => navigation.navigate('CalculateWeight', { name: 'Buffalo', image: require('../assets/Buffalo.jpg') })}>
                             <Image source={require('../assets/Buffalo.jpg')} resizeMode='contain' style={styles.imgaeStyle} />
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => navigation.navigate('CalculateWeight', { name: 'Goat' })}>
+                        <TouchableOpacity onPress={() => navigation.navigate('CalculateWeight', { name: 'Goat', image: require('../assets/Goat.jpg') })}>
                             <Image source={require('../assets/Goat.jpg')} resizeMode='contain' style={styles.imgaeStyle} />
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => navigation.navigate('CalculateWeight', { name: 'Sheep' })}>
+                        <TouchableOpacity onPress={() => navigation.navigate('CalculateWeight', { name: 'Sheep', image: require('../assets/Sheep.jpg') })}>
                             <Image source={require('../assets/Sheep.jpg')} resizeMode='contain' style={styles.imgaeStyle} />
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => navigation.navigate('CalculateWeight', { name: 'Dog' })}>
-                            <Image source={require('../assets/dog.jpg')} resizeMode='contain' style={styles.imgaeStyle} />
+                        <TouchableOpacity onPress={() => navigation.navigate('CalculateWeight', { name: 'Dog', image: require('../assets/Dog.jpg') })}>
+                            <Image source={require('../assets/Dog.jpg')} resizeMode='contain' style={styles.imgaeStyle} />
                         </TouchableOpacity>
                     </View>
                 </ScrollView>
@@ -70,10 +70,11 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: WHITE,
-        paddingTop: 5
+        paddingTop: 5,
+        paddingHorizontal: 3,
     },
     imgaeStyle: {
-        width: widthPercentageToDP(30),
+        width: widthPercentageToDP(29),
         height: heightPercentageToDP(10),
         borderRadius: 10,
         borderColor: CYAN_BLUE,

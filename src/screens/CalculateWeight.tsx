@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, {  useRef, useState } from 'react'
 import { ActivityIndicator, Image, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, ToastAndroid, TouchableOpacity, View } from 'react-native'
 import { BLACK, CYAN_BLUE, DARKGRAY, WHITE } from '../shared/constant/color';
 import Api from '../api/Api';
@@ -10,6 +10,7 @@ import AlertModal from '../shared/constant/AlertModal';
 
 function CalculateWeight(props: any) {
   const name = props?.route?.params?.name;
+  const image = props?.route?.params?.image;
   const { t } = useTranslation();
   const viewShotRef: any = useRef();
   const [result, setResult] = useState('')
@@ -25,10 +26,6 @@ function CalculateWeight(props: any) {
     field6: '',
   })
 
-  useEffect(() => {
-    handleGetConstant();
-  }, [])
-
   const onProceedViewImage = (image: any) => {
     setSelectedImage(image)
     setModalVisible(true);
@@ -38,14 +35,6 @@ function CalculateWeight(props: any) {
     setModalVisible(false);
   };
 
-  const handleGetConstant = async () => {
-    try {
-      const response = await Api.getConstantValue();
-      console.log(response?.data)
-    } catch (error) {
-      console.log(error)
-    }
-  }
   const handleCalculate = async () => {
     const payload = {
       type: name || "",
@@ -62,6 +51,7 @@ function CalculateWeight(props: any) {
         setResult(response?.data?.data)
         setLoader(false)
       } else {
+        ToastAndroid.show(t('Enter at least one value'), ToastAndroid.SHORT);
         setResult('')
       }
     } catch (error) {
@@ -106,8 +96,8 @@ function CalculateWeight(props: any) {
                   value={formValue.field1}
                 />
               </View>
-              <TouchableOpacity onPress={() => onProceedViewImage(require('../assets/dog.jpg'))}>
-                <Image source={require('../assets/dog.jpg')} resizeMode='contain' style={styles.imgaeStyle} />
+              <TouchableOpacity onPress={() => onProceedViewImage(image)}>
+                <Image source={image} resizeMode='contain' style={styles.imgaeStyle} />
               </TouchableOpacity>
             </View>
             <View style={styles.mainInputContainer}>
@@ -124,8 +114,8 @@ function CalculateWeight(props: any) {
                   value={formValue.field2}
                 />
               </View>
-              <TouchableOpacity onPress={() => onProceedViewImage(require('../assets/dog.jpg'))}>
-                <Image source={require('../assets/dog.jpg')} resizeMode='contain' style={styles.imgaeStyle} />
+              <TouchableOpacity onPress={() => onProceedViewImage(image)}>
+                <Image source={image} resizeMode='contain' style={styles.imgaeStyle} />
               </TouchableOpacity>
             </View>
 
@@ -143,8 +133,8 @@ function CalculateWeight(props: any) {
                   value={formValue.field3}
                 />
               </View>
-              <TouchableOpacity onPress={() => onProceedViewImage(require('../assets/dog.jpg'))}>
-                <Image source={require('../assets/dog.jpg')} resizeMode='contain' style={styles.imgaeStyle} />
+              <TouchableOpacity onPress={() => onProceedViewImage(image)}>
+                <Image source={image} resizeMode='contain' style={styles.imgaeStyle} />
               </TouchableOpacity>
             </View>
 
@@ -162,8 +152,8 @@ function CalculateWeight(props: any) {
                   value={formValue.field4}
                 />
               </View>
-              <TouchableOpacity onPress={() => onProceedViewImage(require('../assets/dog.jpg'))}>
-                <Image source={require('../assets/dog.jpg')} resizeMode='contain' style={styles.imgaeStyle} />
+              <TouchableOpacity onPress={() => onProceedViewImage(image)}>
+                <Image source={image} resizeMode='contain' style={styles.imgaeStyle} />
               </TouchableOpacity>
             </View>
 
@@ -181,8 +171,8 @@ function CalculateWeight(props: any) {
                   value={formValue.field5}
                 />
               </View>
-              <TouchableOpacity onPress={() => onProceedViewImage(require('../assets/dog.jpg'))}>
-                <Image source={require('../assets/dog.jpg')} resizeMode='contain' style={styles.imgaeStyle} />
+              <TouchableOpacity onPress={() => onProceedViewImage(image)}>
+                <Image source={image} resizeMode='contain' style={styles.imgaeStyle} />
               </TouchableOpacity>
             </View>
             <View style={styles.mainInputContainer}>
@@ -199,8 +189,8 @@ function CalculateWeight(props: any) {
                   value={formValue.field6}
                 />
               </View>
-              <TouchableOpacity onPress={() => onProceedViewImage(require('../assets/dog.jpg'))}>
-                <Image source={require('../assets/dog.jpg')} resizeMode='contain' style={styles.imgaeStyle} />
+              <TouchableOpacity onPress={() => onProceedViewImage(image)}>
+                <Image source={image} resizeMode='contain' style={styles.imgaeStyle} />
               </TouchableOpacity>
             </View>
 
