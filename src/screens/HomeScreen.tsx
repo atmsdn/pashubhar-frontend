@@ -6,7 +6,6 @@ import { t } from 'i18next';
 import Collapsible from 'react-native-collapsible';
 import RightIcon from '../shared/svg/RightIcon';
 import DownIcon from '../shared/svg/DownIcon';
-import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
 
 function HomeScreen({ navigation }: any) {
     const [isCollapsed, setIsCollapsed] = useState(true);
@@ -14,6 +13,7 @@ function HomeScreen({ navigation }: any) {
     const toggleCollapsible = () => {
         setIsCollapsed(!isCollapsed);
     };
+    
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.container}>
@@ -24,15 +24,24 @@ function HomeScreen({ navigation }: any) {
                 </View>
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <View style={styles.textContainer}>
-                        <Text style={styles.title}>Maharashtra Animal and Fishery sciences University Nagpur</Text>
-                        <Text style={styles.department}>Department of Animal Genetics and Breeding</Text>
-                        <Text style={styles.subtitle}>Krantisinh Nana Patil College of Veterinary Science Shirwal Tal- Khandala District- Satara 412801</Text>
+                        <View style={{ backgroundColor: WHITE, elevation: 8, borderRadius: 10, marginBottom: 10 }}>
+                            <Text style={styles.name}>{t('University')}</Text>
+                            <Text style={styles.title}>{t('Maharashtra Animal and Fishery sciences University Nagpur')}</Text>
+                        </View>
+                        <View style={{ backgroundColor: WHITE, elevation: 8, borderRadius: 10, marginBottom: 10 }}>
+                            <Text style={styles.name}>{t('Department')}</Text>
+                            <Text style={styles.title}>{t('Department of Animal Genetics and Breeding')}</Text>
+                        </View>
+                        <View style={{ backgroundColor: WHITE, elevation: 8, borderRadius: 10 }}>
+                            <Text style={styles.name}>{t('Collage')}</Text>
+                            <Text style={styles.title}>{t('Krantisinh Nana Patil College of Veterinary Science Shirwal Tal- Khandala District- Satara 412801')}</Text>
+                        </View>
                     </View>
                     <View style={styles.aboutUsView}>
                         <TouchableOpacity onPress={toggleCollapsible} >
                             <View style={styles.aboutIcons}>
                                 {!isCollapsed ? <DownIcon width={15} height={15} /> : <RightIcon width={15} height={15} />}
-                                <Text style={styles.aboutUsText}>{t('About Us Information')}</Text>
+                                <Text style={styles.aboutUsText}>{t('animals weight / pashubhar app importance')}</Text>
                             </View>
                         </TouchableOpacity>
                         <Collapsible collapsed={isCollapsed}>
@@ -41,22 +50,44 @@ function HomeScreen({ navigation }: any) {
                             </View>
                         </Collapsible>
                     </View>
+                    <Text style={styles.title}>{t('Calculate Weight')}</Text>
                     <View style={styles.imagesView}>
-                        <TouchableOpacity onPress={() => navigation.navigate('CalculateWeight', { name: 'Cow', image: require('../assets/Cow.jpg') })}>
-                            <Image source={require('../assets/Cow.jpg')} resizeMode='contain' style={styles.imgaeStyle} />
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={() => navigation.navigate('CalculateWeight', { name: 'Buffalo', image: require('../assets/Buffalo.jpg') })}>
-                            <Image source={require('../assets/Buffalo.jpg')} resizeMode='contain' style={styles.imgaeStyle} />
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={() => navigation.navigate('CalculateWeight', { name: 'Goat', image: require('../assets/Goat.jpg') })}>
-                            <Image source={require('../assets/Goat.jpg')} resizeMode='contain' style={styles.imgaeStyle} />
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={() => navigation.navigate('CalculateWeight', { name: 'Sheep', image: require('../assets/Sheep.jpg') })}>
-                            <Image source={require('../assets/Sheep.jpg')} resizeMode='contain' style={styles.imgaeStyle} />
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={() => navigation.navigate('CalculateWeight', { name: 'Dog', image: require('../assets/Dog.jpg') })}>
-                            <Image source={require('../assets/Dog.jpg')} resizeMode='contain' style={styles.imgaeStyle} />
-                        </TouchableOpacity>
+                        <View>
+                            <TouchableOpacity onPress={() => navigation.navigate('CalculateWeight', { name: 'Cow', image: require('../assets/Cow.jpg') })}>
+                                <Image source={require('../assets/Cow.jpg')} resizeMode='contain' style={styles.imgaeStyle} />
+                            </TouchableOpacity>
+                            <Text style={styles.name}>{t('Cow')}</Text>
+                        </View>
+                        <View>
+                            <TouchableOpacity onPress={() => navigation.navigate('CalculateWeight', { name: 'Buffalo', image: require('../assets/Buffalo.jpg') })}>
+                                <Image source={require('../assets/Buffalo.jpg')} resizeMode='contain' style={styles.imgaeStyle} />
+                            </TouchableOpacity>
+                            <Text style={styles.name}>{t('Buffalo')}</Text>
+                        </View>
+                        <View>
+                            <TouchableOpacity onPress={() => navigation.navigate('CalculateWeight', { name: 'Goat', image: require('../assets/Goat.jpg') })}>
+                                <Image source={require('../assets/Goat.jpg')} resizeMode='contain' style={styles.imgaeStyle} />
+                            </TouchableOpacity>
+                            <Text style={styles.name}>{t('Goat')}</Text>
+                        </View>
+                        <View>
+                            <TouchableOpacity onPress={() => navigation.navigate('CalculateWeight', { name: 'Sheep', image: require('../assets/Sheep.jpg') })}>
+                                <Image source={require('../assets/Sheep.jpg')} resizeMode='contain' style={styles.imgaeStyle} />
+                            </TouchableOpacity>
+                            <Text style={styles.name}>{t('Sheep')}</Text>
+                        </View>
+                        <View>
+                            <TouchableOpacity onPress={() => navigation.navigate('CalculateWeight', { name: 'Dog', image: require('../assets/Dog.jpg') })}>
+                                <Image source={require('../assets/Dog.jpg')} resizeMode='contain' style={styles.imgaeStyle} />
+                            </TouchableOpacity>
+                            <Text style={styles.name}>{t('Dog')}</Text>
+                        </View>
+                        <View>
+                            <TouchableOpacity>
+                                <View style={styles.emptyImgaeStyle} />
+                            </TouchableOpacity>
+                            <Text style={styles.name}></Text>
+                        </View>
                     </View>
                 </ScrollView>
             </View>
@@ -74,16 +105,27 @@ const styles = StyleSheet.create({
         paddingHorizontal: 3,
     },
     imgaeStyle: {
-        width: widthPercentageToDP(29),
-        height: heightPercentageToDP(10),
-        borderRadius: 10,
+        width: 100,
+        height: 100,
+        borderRadius: 50,
         borderColor: CYAN_BLUE,
         borderWidth: 1
+    },
+    emptyImgaeStyle: {
+        width: 100,
+        height: 100,
+        borderRadius: 50,
+
     },
     logoContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginBottom: 10,
+        marginHorizontal: 5,
+        paddingVertical: 10,
+        // backgroundColor: WHITE,
+        // elevation: 8,
+        // borderRadius: 10,
+        // marginBottom: 10
     },
     logo: {
         width: 102,
@@ -99,7 +141,8 @@ const styles = StyleSheet.create({
         width: 20,
     },
     textContainer: {
-        alignItems: 'center',
+        // alignItems: 'center',
+        marginHorizontal: 10,
         marginVertical: 10
     },
     projectName: {
@@ -109,12 +152,19 @@ const styles = StyleSheet.create({
         alignSelf: 'center'
     },
     title: {
-        fontSize: 22,
+        fontSize: 18,
         paddingHorizontal: 10,
         color: CYAN_BLUE,
         fontWeight: 'bold',
-        marginBottom: 15,
+        marginVertical: 10,
         textAlign: 'center',
+    },
+    name: {
+        fontSize: 14,
+        color: CYAN_BLUE,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        marginTop: 10
     },
     subtitle: {
         color: CYAN_BLUE,
@@ -122,6 +172,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontWeight: 'bold',
         textAlign: 'center',
+        marginVertical: 15,
     },
     department: {
         textAlign: 'center',
@@ -129,20 +180,20 @@ const styles = StyleSheet.create({
         color: CYAN_BLUE,
         fontSize: 18,
         fontWeight: 'bold',
-        marginBottom: 15,
+        marginVertical: 15,
     },
     aboutUsView: {
         marginHorizontal: 10,
         borderColor: CYAN_BLUE,
-        borderWidth: 1,
+        borderWidth: 0.5,
         borderRadius: 10,
         marginVertical: 10,
         paddingHorizontal: 10,
-        paddingVertical: 10
+        paddingVertical: 10,
     },
     aboutUsText: {
         color: CYAN_BLUE,
-        fontSize: 18,
+        fontSize: 16,
         fontWeight: 'bold',
         marginLeft: 10
     },
@@ -162,8 +213,9 @@ const styles = StyleSheet.create({
         rowGap: 10,
         columnGap: 8,
         alignItems: 'center',
+        justifyContent: 'space-between',
         paddingHorizontal: 10,
         marginBottom: 10,
-        marginTop: 20
+        marginTop: 10
     },
 })

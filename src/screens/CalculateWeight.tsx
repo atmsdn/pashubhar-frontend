@@ -1,4 +1,4 @@
-import React, {  useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { ActivityIndicator, Image, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, ToastAndroid, TouchableOpacity, View } from 'react-native'
 import { BLACK, CYAN_BLUE, DARKGRAY, WHITE } from '../shared/constant/color';
 import Api from '../api/Api';
@@ -84,9 +84,11 @@ function CalculateWeight(props: any) {
         <ViewShot ref={viewShotRef} options={{ format: 'jpg', quality: 0.9 }}>
           <View style={{ backgroundColor: 'white', flex: 1 }}>
             <Text style={styles.title}>{t(name)}</Text>
-            <View style={styles.mainInputContainer}>
-              <View style={styles.textInputContainer}>
-                <Text style={styles.label}>{t('Name/Identity')}</Text>
+            <Text style={styles.date}>{`${new Date()?.getDate()}/${new Date()?.getMonth() + 1}/${new Date()?.getFullYear()}`}</Text>
+
+            <View>
+              <Text style={styles.label}>{t('Name/Identity')}</Text>
+              <View style={styles.nameTextInputContainer}>
                 <TextInput
                   style={styles.textInput}
                   onChangeText={(val) => textInputChange('field1', val)}
@@ -96,13 +98,10 @@ function CalculateWeight(props: any) {
                   value={formValue.field1}
                 />
               </View>
-              <TouchableOpacity onPress={() => onProceedViewImage(image)}>
-                <Image source={image} resizeMode='contain' style={styles.imgaeStyle} />
-              </TouchableOpacity>
             </View>
             <View style={styles.mainInputContainer}>
+              <Text style={styles.label}>{t('Height')}</Text>
               <View style={styles.textInputContainer}>
-                <Text style={styles.label}>{t('Height')}</Text>
                 <Text style={styles.label1}>{t('Cm')}</Text>
                 <TextInput
                   style={styles.textInput}
@@ -120,8 +119,8 @@ function CalculateWeight(props: any) {
             </View>
 
             <View style={styles.mainInputContainer}>
+              <Text style={styles.label}>{t('Height')}</Text>
               <View style={styles.textInputContainer}>
-                <Text style={styles.label}>{t('Height')}</Text>
                 <Text style={styles.label1}>{t('Cm')}</Text>
                 <TextInput
                   style={styles.textInput}
@@ -139,8 +138,8 @@ function CalculateWeight(props: any) {
             </View>
 
             <View style={styles.mainInputContainer}>
+              <Text style={styles.label}>{t('Height')}</Text>
               <View style={styles.textInputContainer}>
-                <Text style={styles.label}>{t('Height')}</Text>
                 <Text style={styles.label1}>{t('Cm')}</Text>
                 <TextInput
                   style={styles.textInput}
@@ -158,8 +157,8 @@ function CalculateWeight(props: any) {
             </View>
 
             <View style={styles.mainInputContainer}>
+              <Text style={styles.label}>{t('Height')}</Text>
               <View style={styles.textInputContainer}>
-                <Text style={styles.label}>{t('Height')}</Text>
                 <Text style={styles.label1}>{t('Cm')}</Text>
                 <TextInput
                   style={styles.textInput}
@@ -176,8 +175,8 @@ function CalculateWeight(props: any) {
               </TouchableOpacity>
             </View>
             <View style={styles.mainInputContainer}>
+              <Text style={styles.label}>{t('Height')}</Text>
               <View style={styles.textInputContainer}>
-                <Text style={styles.label}>{t('Height')}</Text>
                 <Text style={styles.label1}>{t('Cm')}</Text>
                 <TextInput
                   style={styles.textInput}
@@ -240,6 +239,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
   },
+  date: {
+    fontSize: 18,
+    color: CYAN_BLUE,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
   imgaeStyle: {
     width: 80,
     height: 45,
@@ -275,6 +280,16 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     width: '70%'
   },
+  nameTextInputContainer: {
+    marginTop: 20,
+    marginBottom: 5,
+    height: 45,
+    color: 'white',
+    alignItems: 'center',
+    borderWidth: 0.5,
+    borderRadius: 10,
+    // width: '70%'
+  },
   textInput: {
     color: CYAN_BLUE,
     fontWeight: 'bold',
@@ -300,10 +315,8 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     fontSize: 12,
     position: 'absolute',
-    top: -10,
     backgroundColor: WHITE,
     paddingHorizontal: 5,
-    left: 10
   },
   label1: {
     color: CYAN_BLUE,

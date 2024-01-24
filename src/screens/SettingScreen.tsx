@@ -41,11 +41,6 @@ function SettingScreen({ navigation }: any) {
                 <TouchableOpacity style={styles.profileContainer} onPress={() => handleLogout()}>
                     <Text style={styles.txtName}>{t('Logout')}</Text>
                 </TouchableOpacity>
-            </View>
-            <View style={{ paddingBottom: 10 }}>
-                <View style={{ marginBottom: 10 }}>
-                    <Text style={{ alignSelf: 'center', marginTop: 10, fontSize: 12, fontWeight: 'bold' }}>App Version 0.0.1</Text>
-                </View>
                 <View>
                     <DropDownPickerSearchable
                         name={t('Select Language')}
@@ -59,6 +54,12 @@ function SettingScreen({ navigation }: any) {
                         style={styles.inputElement}
                     />
                 </View>
+            </View>
+            <View style={{ paddingBottom: 10 }}>
+                <View style={{ marginBottom: 10 }}>
+                    <Text style={{ alignSelf: 'center', marginTop: 10, fontSize: 12, fontWeight: 'bold' }}>App Version 0.0.1</Text>
+                </View>
+                
             </View>
             <AlertModal modalVisible={modalVisible} setModalVisible={setModalVisible}
                 firstLineContent={t('Are you sure you want to logout?')}
@@ -84,7 +85,7 @@ const styles = StyleSheet.create({
     profileContainer: {
         backgroundColor: WHITE,
         borderColor: CYAN_BLUE,
-        borderWidth: 1,
+        borderWidth: 0.5,
         borderRadius: 10,
         padding: 12,
         marginVertical: 10,

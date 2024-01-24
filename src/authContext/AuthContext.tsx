@@ -13,7 +13,7 @@ export function MyContextProvider({ children }: any) {
     const [state, setState]: any = useState({
         userInfo: {},
         isAuthenticated: false,
-        selectedLanguage: 'en'
+        selectedLanguage: 'mr'
     });
 
     useEffect(() => {
@@ -22,7 +22,7 @@ export function MyContextProvider({ children }: any) {
                 const response: any = await AsyncStorage.multiGet([ASYNC_STORAGE.ISAUTHENTICATED, ASYNC_STORAGE.USERINFO, ASYNC_STORAGE.SELECTEDLANGUAGE]);
                 if (response) {
                     setState({
-                        ...state, isAuthenticated: response[0]?.[1] || false, userInfo: response[1]?.[1] || {}, selectedLanguage: response[2]?.[1] || 'en'
+                        ...state, isAuthenticated: response[0]?.[1] || false, userInfo: response[1]?.[1] || {}, selectedLanguage: response[2]?.[1] || 'mr'
                     });
                 }
             } catch (error) {
@@ -43,8 +43,8 @@ export function MyContextProvider({ children }: any) {
         }
     };
     const logout = () => {
-        setState({ ...state, isAuthenticated: false, userInfo: {}, selectedLanguage: 'en' });
-        AsyncStorage.multiSet([[ASYNC_STORAGE.ISAUTHENTICATED, JSON.stringify(false)], [ASYNC_STORAGE.USERINFO, JSON.stringify({})], [ASYNC_STORAGE.SELECTEDLANGUAGE, 'en']]);
+        setState({ ...state, isAuthenticated: false, userInfo: {}, selectedLanguage: 'mr' });
+        AsyncStorage.multiSet([[ASYNC_STORAGE.ISAUTHENTICATED, JSON.stringify(false)], [ASYNC_STORAGE.USERINFO, JSON.stringify({})], [ASYNC_STORAGE.SELECTEDLANGUAGE, 'mr']]);
     }
     return (
         <MyContext.Provider value={{ state, updateState, logout }}>

@@ -39,7 +39,7 @@
     "Animal Species": "पशु प्रजाति",
     "Profile": "प्रोफ़ाइल",
     "Dept. Info.": "विभाग जानकारी",
-    "About Us Information": "हमारे बारे में जानकारी",
+    "animals weight / pashubhar app importance": "पशु का वजन/पशुभर ऐप का महत्व",
     "Logout": "बहार पडो",
     "Cancel": "रद्द करें",
     "Are you sure you want to logout?": "क्या आप वाकई लॉगआउट करना चाहते हैं?",
@@ -64,5 +64,11 @@
     "Take Screenshot and Save": "स्क्रीनशॉट लें और सेव करें",
     "Otp Verification": "ओटीपी सत्यापन",
     "Enter at least one value": "कम से कम एक मान दर्ज करें",
-    "Screenshot saved": "स्क्रीनशॉट सहेजा गया"
+    "Screenshot saved": "स्क्रीनशॉट सहेजा गया",
+    "Maharashtra Animal and Fishery sciences University Nagpur": "महाराष्ट्र पशु एवं मत्स्य विज्ञान विश्वविद्यालय नागपुर",
+    "Department of Animal Genetics and Breeding": "पशु आनुवंशिकी एवं प्रजनन विभाग",
+    "Krantisinh Nana Patil College of Veterinary Science Shirwal Tal- Khandala District- Satara 412801": "क्रांतिसिंह नाना पाटिल कॉलेज ऑफ वेटरनरी साइंस शिरवाल ताल- खंडाला जिला- सतारा 412801",
+    "Collage": "कॉलेज",
+    "Department": "विभाग",
+    "University": "विश्वविद्यालय"
 }

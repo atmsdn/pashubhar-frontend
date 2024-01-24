@@ -65,7 +65,7 @@ function SignInScreen({ navigation }: any) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <View showsVerticalScrollIndicator={false}>
         <Text style={styles.projectName}>{t('Pashubhar')}</Text>
         <Text style={styles.subtitle}>{t('An accurate estimation of animal weight using selected body measurements can be done using the Pashubhar application in your mobile.')}</Text>
         <View style={styles.textInputContainer}>
@@ -80,10 +80,10 @@ function SignInScreen({ navigation }: any) {
             value={formValue.mobileNo}
           />
         </View>
-      </ScrollView>
+      </View>
 
       <View>
-        <View style={{ marginVertical: 10 }}>
+        <View >
           <TouchableOpacity style={styles.signIn} onPress={() => sendOTP()}>
             <Text style={[styles.textSign, { color: '#fff' }]}> {t('Request OTP')} </Text>
           </TouchableOpacity>
@@ -93,11 +93,12 @@ function SignInScreen({ navigation }: any) {
           <Text style={{ marginHorizontal: 5 }}>or</Text>
           <View style={[styles.horizontalLine, { width: '47%' }]}></View>
         </View>
-        <View style={{ marginVertical: 10 }}>
+        <View style={{ marginBottom: 10 }}>
           <TouchableOpacity style={styles.signIn} onPress={() => { navigation.navigate('SignUpScreen'), setFormValue({ ...formValue, mobileNo: '' }) }}>
             <Text style={[styles.textSign, { color: '#fff' }]}> {t('Sign Up')} </Text>
           </TouchableOpacity>
         </View>
+
         <View>
           <DropDownPickerSearchable
             name={t('Select Language')}
@@ -124,7 +125,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     paddingHorizontal: 20,
     justifyContent: 'space-between',
-    paddingBottom: 20,
+    paddingVertical: 20,
   },
   projectName: {
     fontSize: 32,

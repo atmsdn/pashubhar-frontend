@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     paddingHorizontal: 20,
     justifyContent: 'space-between',
-    paddingBottom: 20,
+    paddingVertical: 20,
   },
   subView: {
     flexDirection: 'column',

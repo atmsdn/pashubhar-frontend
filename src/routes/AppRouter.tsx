@@ -29,7 +29,7 @@ const AppRouter = ({ navigation }: any) => {
         component={HomeScreen}
         options={({ navigation }) => ({
           headerShown: true,
-          headerTitle: t('Home Screen'),
+          headerTitle: t('Pashubhar'),
           headerTitleStyle: { fontWeight: 'bold', color: CYAN_BLUE, fontSize: 18 },
           headerRight: () => (
             <TouchableOpacity onPress={() => navigation.navigate('SettingScreen')}>
